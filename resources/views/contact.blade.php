@@ -43,7 +43,7 @@
             <div class="bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-700 opacity-0" data-animate="fadeIn" data-delay="600">
                 <h3 class="text-3xl font-semibold mb-6 text-blue-400 border-b-2 border-gray-700 pb-3">Send Me a Message</h3>
 
-                <!-- Area untuk menampilkan pesan sukses/gagal dari Email.js -->
+               
                 <div id="form-messages" class="mb-4"></div>
 
                 <form id="contact-form" class="space-y-6">
@@ -67,14 +67,11 @@
     </div>
 </section>
 
-<!-- Sertakan CDN Email.js -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script type="text/javascript">
-    // Inisialisasi Email.js dengan Kunci Publik Anda
-    // Anda bisa menemukan Kunci Publik Anda di dashboard Email.js di bagian Account -> API Keys
     (function() {
-        emailjs.init("_cPXMwdoKLiLG3I9V"); // Ganti dengan Kunci Publik Anda yang sebenarnya
+        emailjs.init("_cPXMwdoKLiLG3I9V"); 
     })();
 
     window.onload = function() {
@@ -84,27 +81,25 @@
         const formMessages = document.getElementById('form-messages');
 
         contactForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Mencegah pengiriman formulir bawaan
+            event.preventDefault(); 
 
-            // Tampilkan indikator loading dan nonaktifkan tombol
+            
             submitButton.disabled = true;
             submitButton.classList.add('opacity-50', 'cursor-not-allowed');
             loadingIndicator.classList.remove('hidden');
-            formMessages.innerHTML = ''; // Hapus pesan sebelumnya
-
-            // Kirim formulir menggunakan Email.js
-            // Ganti 'YOUR_SERVICE_ID' dan 'YOUR_TEMPLATE_ID' dengan ID Layanan dan Template Anda
+            formMessages.innerHTML = ''; 
+           
             emailjs.sendForm('service_npdjdgg', 'template_tvt6de5', this)
                 .then(function() {
-                    // Saat berhasil
+                   
                     formMessages.innerHTML = `
                         <div class="bg-green-600 text-white p-4 rounded-lg mb-4 shadow-md animated-fadeIn">
                             Pesan Anda telah berhasil terkirim!
                         </div>
                     `;
-                    contactForm.reset(); // Bersihkan kolom formulir
+                    contactForm.reset(); 
                 }, function(error) {
-                    // Saat terjadi kesalahan
+                   
                     formMessages.innerHTML = `
                         <div class="bg-red-600 text-white p-4 rounded-lg mb-4 shadow-md animated-fadeIn">
                             Gagal mengirim pesan Anda. Silakan coba lagi. Error: ${JSON.stringify(error)}
@@ -112,7 +107,6 @@
                     `;
                 })
                 .finally(function() {
-                    // Aktifkan kembali tombol dan sembunyikan indikator loading
                     submitButton.disabled = false;
                     submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
                     loadingIndicator.classList.add('hidden');
